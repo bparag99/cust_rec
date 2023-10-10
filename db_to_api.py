@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, json
 
 import psycopg2
 
@@ -61,7 +61,7 @@ def getData():
         'additional_preferences': row[21]
         } for row in result] # Adjust column names as needed
 
-    return jsonify(response[0])
+    return json.dumps(response[0])
 
 
 if __name__ == '__main__':
