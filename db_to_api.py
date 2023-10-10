@@ -1,11 +1,15 @@
 from flask import Flask, request, jsonify
 
 import psycopg2
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/name', methods=['GET'])
+@cross_origin()
 def getData():
     print('2')
     input_var = request.args.get('input_var')
