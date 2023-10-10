@@ -35,7 +35,7 @@ def getData():
     conn.close()
 
     # Converting the query result to JSON
-    print(len(result[0]))
+    print(len(result))
     response = [{
         'customer_id': row[0], 
         'Customer_Name': row[1], 
