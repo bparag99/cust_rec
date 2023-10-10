@@ -61,7 +61,7 @@ def getData():
         'additional_preferences': row[21]
         } for row in result] # Adjust column names as needed
 
-    return jsonify(response[0])
+    return jsonify(response)
 
 
 if __name__ == '__main__':
