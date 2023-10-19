@@ -2,3 +2,4 @@ Flask
 gunicorn==19.7.1
 psycopg2
 flask_cors
+pandas
