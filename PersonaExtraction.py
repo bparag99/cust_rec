@@ -243,7 +243,8 @@ class PersonaExtraction:
 
         print('Retrieveing Customer Attributes as well as customer 360 information')
         persona_df = self.retrieve_customer_entity(chat_path,file_name)
-        print('Retrieveing Customer Attributes as well as customer 360 information completed. Saving it into cache') 
+        print('Retrieveing Customer Attributes as well as customer 360 information completed. Saving it into cache')
+        print(persona_df.columns)
         persona_df = self.df_parser(persona_df)
         # print('Saved into cache file successfully')
         # print('Extracting required columns from the Customer profile dump')
