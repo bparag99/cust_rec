@@ -222,7 +222,7 @@ class PersonaExtraction:
     def retrieve_customer_entity(self,chat_path,file_name):
         final_list =[]        
         # Change the directory
-        os.chdir(chat_path)      
+        # os.chdir(chat_path)      
         if file_name is None:
             for file in os.listdir():                
                 # Check whether file is in text format or not
