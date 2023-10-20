@@ -10,7 +10,6 @@ import pandas as pd
 
 # Data Preprocessing
 from sklearn.preprocessing import StandardScaler, PowerTransformer, OrdinalEncoder
-import tiktoken
 
 import openai
 from openai.embeddings_utils import get_embedding
