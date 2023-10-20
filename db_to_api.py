@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
-
+import os
 import psycopg2
+import json
 from flask_cors import CORS, cross_origin
 from DatabasePostgresqlAWS import DatabasePostgresqlAWS
+
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
