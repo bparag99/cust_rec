@@ -24,7 +24,7 @@ def fetch_customers():
 @cross_origin()
 def find_all_chats():  
     cwd = os.getcwd()
-    print(cwd+r'\chat')
+    print('Current working directory : ', cwd)
     # for file in os.listdir():
     os.chdir(path)
     chat_list = os.listdir()
