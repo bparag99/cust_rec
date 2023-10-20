@@ -42,6 +42,7 @@ def find_all_chats():
     print(json_chat_list)
     os.chdir(cwd)
     return json_chat_list
+    
 @app.route('/customer', methods=['GET'])
 @cross_origin()
 def view_customer_chat():
@@ -49,8 +50,7 @@ def view_customer_chat():
     cwd = os.getcwd()
     print('Current working directory : ', cwd)
     # for file in os.listdir():
-    os.chdir(cwd+'/test')
-        
+    os.chdir(cwd+'/test')      
     for file in os.listdir():
         print(file)
         print(name)
@@ -70,6 +70,6 @@ def view_customer_chat():
         else:
             print(json.dumps('Error : No chats found'))
             os.chdir(cwd)
-            return json.dumps('Error : No chats found'')
+            return json.dumps('Error : No chats found')
 if __name__ == '__main__':
     app.run(debug=True,port=8001)
