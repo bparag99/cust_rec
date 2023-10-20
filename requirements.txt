@@ -16,3 +16,4 @@ tiktok-api
 lightgbm  
 psycopg2-binary
 plotly
+sumy
