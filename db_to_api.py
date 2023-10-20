@@ -42,5 +42,34 @@ def find_all_chats():
     print(json_chat_list)
     os.chdir(cwd)
     return json_chat_list
+@app.route('/customer', methods=['GET'])
+@cross_origin()
+def view_customer_chat():
+    name = request.args.get('chat_name')
+    cwd = os.getcwd()
+    print('Current working directory : ', cwd)
+    # for file in os.listdir():
+    os.chdir(cwd+'/test')
+        
+    for file in os.listdir():
+        print(file)
+        print(name)
+        if file.startswith(str(name)):
+            print(1)
+            chat_data = {}
+            # print(file)
+            chat_content = open(file, 'r').read()
+            print(chat_content)
+            
+            chat_data['name'] = file.split('.')[0].split('_')[0]
+            chat_data['date'] = file.split('.')[0].split('_')[1]
+            chat_data['content'] = chat_content
+            print(json.dumps(chat_data))
+            os.chdir(cwd)
+            return json.dumps(chat_data) 
+        else:
+            print(json.dumps('Error : No chats found'))
+            os.chdir(cwd)
+            return json.dumps('Error')
 if __name__ == '__main__':
     app.run(debug=True,port=8001)
