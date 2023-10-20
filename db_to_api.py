@@ -1,9 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, redirect
 import os
 import psycopg2
 import json
 from flask_cors import CORS, cross_origin
 from DatabasePostgresqlAWS import DatabasePostgresqlAWS
+from recommendation import Recommendation
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -20,8 +21,8 @@ def fetch_customers():
     json = customer_df.to_json(orient='table', index=False)
     # Print json object
     print(json)
-
     return json
+
 @app.route('/chats', methods=['GET'])
 @cross_origin()
 def find_all_chats():  
@@ -64,12 +65,23 @@ def view_customer_chat():
             chat_data['name'] = file.split('.')[0].split('_')[0]
             chat_data['date'] = file.split('.')[0].split('_')[1]
             chat_data['content'] = chat_content
+            chat_data['filename'] = file
             print(json.dumps(chat_data))
             os.chdir(cwd)
             return json.dumps(chat_data) 
     else:
         print(json.dumps('Error : No chats found'))
-        os.chdir(cwd)
         return json.dumps('Error : No chats found')
+
+@app.route('/process', methods=['POST'])
+@cross_origin()
+def generate360():
+    file_name = request.form.get('filename')
+    recommend = Recommendation()
+    customer_id = recommend.create_recommendation(file_name)
+    return redirect(f'https://customerservice-j5wx.onrender.com/name?customer_id={customer_id}')
+
+
+
 if __name__ == '__main__':
     app.run(debug=True,port=8001)
