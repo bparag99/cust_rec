@@ -21,7 +21,7 @@ import seaborn as sns
 
 # Data Preprocessing
 from sklearn.preprocessing import StandardScaler, PowerTransformer, OrdinalEncoder
-import tiktoken
+# import tiktoken
 
 # Clustering
 from sklearn.cluster import KMeans
