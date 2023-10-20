@@ -25,10 +25,10 @@ import pandas as pd
 # Local Classes
 from PersonaExtraction import PersonaExtraction
 from EmbeddingGenerator import EmbeddingGenerator
-from ClusterAssignment import ClusterAssignment
-from Segmentation import Segmentation
+# from ClusterAssignment import ClusterAssignment
+# from Segmentation import Segmentation
 from DatabasePostgresqlAWS import DatabasePostgresqlAWS
-from OfferRecommendation import OfferRecommendation
+# from OfferRecommendation import OfferRecommendation
 
 class Recommendation:
     def create_recommendation(self,file_name):
