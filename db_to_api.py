@@ -28,7 +28,7 @@ def find_all_chats():
     cwd = os.getcwd()
     print('Current working directory : ', cwd)
     # for file in os.listdir():
-    os.chdir(path)
+    os.chdir(cwd+r'\test')
     chat_list = os.listdir()
     # print(chat_list)
     json_list = []
