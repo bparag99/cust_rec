@@ -215,8 +215,10 @@ class DatabasePostgresqlAWS:
         cursor.execute('CREATE EXTENSION IF NOT EXISTS pg_trgm;')
         cursor.execute('CREATE EXTENSION IF NOT EXISTS vector;')
         cursor.execute('''
-            SELECT cluster_name,customer_360_embedded <=> %s AS similarity
-                    FROM customers.customer_embedding_tbl 
+            SELECT cet.cluster_name,cet.customer_360_embedded <=> %s AS similarity,cst.offers
+                    FROM customers.customer_embedding_tbl cet
+                    inner join CUSTOMERS.customer_segment_tbl cst
+			        on cst.segment_id = CAST(cet.cluster_name as INTEGER)
                     ORDER BY customer_360_embedded <=> %s LIMIT 3;
         ''',(embedding_array,embedding_array)
         )        
@@ -236,7 +238,26 @@ class DatabasePostgresqlAWS:
         cursor.close()
         print('Updated Segmnets for new Customers ')
         return result[0]
-       
+    
+    def fetch_offers(self,customer_360):
+        cursor = self.db_conn.cursor()
+        query_string = """
+        SELECT cpt.customer_id,cpt.customer_name,et.cluster_name,
+            similarity(cpt.customer_360,CAST('leisure' AS TEXT)),
+            offers
+            FROM customers.customer_embedding_tbl et
+			inner join customers.customer_persona_tbl cpt
+			on et.customer_id = cpt.customer_id
+			inner join CUSTOMERS.customer_segment_tbl cst
+			on cst.segment_id = CAST(et.cluster_name as INTEGER)
+            ORDER BY similarity(cpt.customer_360,CAST('leisure' AS TEXT)) LIMIT 3;
+        """
+        cursor.execute(query_string, (customer_360,))
+        result = cursor.fetchall()
+        print(result)
+        cursor.close()
+        return result
+
     # Rerieve Customers for web
     def retrieve_segmented_customer(self,customer_id):
         cursor = self.db_conn.cursor()
