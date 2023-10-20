@@ -67,9 +67,8 @@ def view_customer_chat():
             print(json.dumps(chat_data))
             os.chdir(cwd)
             return json.dumps(chat_data) 
-        else:
-            print(json.dumps('Error : No chats found'))
-            os.chdir(cwd)
-            return json.dumps('Error : No chats found')
+    else:
+        print(json.dumps('Error : No chats found'))
+        return json.dumps('Error : No chats found')
 if __name__ == '__main__':
     app.run(debug=True,port=8001)
