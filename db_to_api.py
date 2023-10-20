@@ -40,6 +40,7 @@ def find_all_chats():
         # print(name_date)
     json_chat_list = json.dumps(json_list)
     print(json_chat_list)
+    os.chdir(cwd)
     return json_chat_list
 if __name__ == '__main__':
     app.run(debug=True,port=8001)
