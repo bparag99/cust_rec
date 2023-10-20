@@ -14,4 +14,5 @@ matplotlib
 seaborn  
 tiktok-api  
 lightgbm  
-psycopg2-binary 
+psycopg2-binary
+plotly
